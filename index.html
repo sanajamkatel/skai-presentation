@@ -114,13 +114,16 @@
   /* ============ SLIDES ============ */
   .slide{
     position:absolute; inset:0;
-    display:flex; flex-direction:column; justify-content:center;
+    display:flex; flex-direction:column; justify-content:flex-start;
     padding:clamp(26px,5vh,52px) clamp(26px,6vw,84px);
     opacity:0; transform:translateX(40px);
     transition: opacity var(--dur) cubic-bezier(.2,.9,.25,1), transform var(--dur) cubic-bezier(.2,.9,.25,1);
     pointer-events:none; overflow-y:auto;
   }
-  .slide::-webkit-scrollbar{ width:0; height:0; }
+  .slide::-webkit-scrollbar{ width:8px; }
+  .slide::-webkit-scrollbar-track{ background:transparent; }
+  .slide::-webkit-scrollbar-thumb{ background:var(--ink-faint); border-radius:4px; }
+  .slide{ scrollbar-width:thin; scrollbar-color:var(--ink-faint) transparent; }
   .slide.active{ opacity:1; transform:translateX(0); pointer-events:auto; position:relative; }
   .slide.prev{ opacity:0; transform:translateX(-40px); }
   .reduce-motion .slide{ transition:opacity .16s linear; transform:none !important; }
@@ -131,7 +134,7 @@
   .r1{animation-delay:.02s} .r2{animation-delay:.08s} .r3{animation-delay:.14s} .r4{animation-delay:.20s}
   .r5{animation-delay:.26s} .r6{animation-delay:.32s} .r7{animation-delay:.38s} .r8{animation-delay:.44s}
 
-  .wrap{ max-width:1160px; width:100%; margin:0 auto; position:relative; z-index:1; }
+  .wrap{ max-width:1160px; width:100%; margin:auto; position:relative; z-index:1; flex:0 0 auto; }
   .center{ text-align:center; margin-left:auto; margin-right:auto; }
 
   .eyebrow{
@@ -379,6 +382,20 @@
     .pxbtn{ padding:10px; gap:0; }
     #track{ display:none; }
     #bezel-bottom{ justify-content:space-between; }
+  }
+  @media (max-height:800px){
+    #bezel-top{ height:44px; }
+    #bezel-bottom{ height:56px; }
+    .slide{ padding:16px clamp(22px,5vw,64px); }
+    h1{ margin:0 0 14px; }
+    .eyebrow{ margin-bottom:14px; }
+    .cover-logo{ height:clamp(64px,10vw,120px); }
+    .shotframe{ height:min(48vh,420px); }
+  }
+  @media (max-height:640px){
+    #bezel-top{ height:38px; } #bezel-bottom{ height:50px; }
+    .plate-label, .led-power{ display:none; }
+    .cover-logo{ height:clamp(52px,8vw,90px); }
   }
 </style>
 

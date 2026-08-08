@@ -79,6 +79,18 @@
   }
   #stage{ position:relative; width:100%; height:100%; overflow:hidden; }
 
+  #scrollhint{
+    position:absolute; left:50%; bottom:12px; transform:translateX(-50%);
+    display:none; align-items:center; gap:6px; z-index:6; pointer-events:none;
+    background:var(--ink); color:var(--bg); font-family:var(--font); font-weight:800; font-size:.68rem;
+    letter-spacing:.06em; text-transform:uppercase; padding:7px 13px; opacity:.94;
+    animation:hintbob 1.4s ease-in-out infinite;
+  }
+  #scrollhint.show{ display:flex; }
+  #scrollhint svg{ width:12px; height:12px; }
+  @keyframes hintbob{ 0%,100%{ transform:translateX(-50%) translateY(0);} 50%{ transform:translateX(-50%) translateY(4px);} }
+  .reduce-motion #scrollhint{ animation:none; }
+
   #bezel-bottom{
     flex:0 0 auto; height:clamp(64px,9vh,84px); display:flex; align-items:center; justify-content:space-between;
     padding:0 clamp(14px,3vw,26px); gap:14px;
@@ -734,6 +746,7 @@
         </section>
 
       </div>
+      <div id="scrollhint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>Scroll for more</div>
     </div>
   </div>
 
@@ -760,6 +773,7 @@
   var prevBtn = document.getElementById('prevBtn');
   var nextBtn = document.getElementById('nextBtn');
   var slidetag = document.getElementById('slidetag');
+  var scrollhint = document.getElementById('scrollhint');
   var current = 0;
   var n = slides.length;
 
@@ -773,6 +787,19 @@
   var ticks = Array.prototype.slice.call(track.querySelectorAll('.tick'));
 
   function pad(x){ return (x < 10 ? '0' : '') + x; }
+
+  function updateScrollHint(){
+    var cur = slides[current];
+    var needsScroll = cur.scrollHeight > cur.clientHeight + 4;
+    var nearBottom = cur.scrollTop + cur.clientHeight >= cur.scrollHeight - 4;
+    scrollhint.classList.toggle('show', needsScroll && !nearBottom);
+  }
+  slides.forEach(function(s){
+    s.addEventListener('scroll', function(){
+      if(s === slides[current]) updateScrollHint();
+    });
+  });
+  window.addEventListener('resize', updateScrollHint);
 
   /* ---- click-to-reveal step controller ---- */
   function setupRevealer(container){
@@ -873,6 +900,7 @@
     nextBtn.disabled = current === n-1;
     slidetag.textContent = cur.dataset.title || '';
     resetRevealersIn(cur);
+    setTimeout(updateScrollHint, 60);
 
     old.querySelectorAll('video').forEach(function(v){ v.pause(); });
     cur.querySelectorAll('video').forEach(function(v){
@@ -951,6 +979,7 @@
   counter.textContent = '01 / ' + pad(n);
   prevBtn.disabled = true;
   slidetag.textContent = slides[0].dataset.title || '';
+  setTimeout(updateScrollHint, 60);
 })();
 </script>
 

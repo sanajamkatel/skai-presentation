@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>skAi — Capstone Presentation</title>
+</head>
+<body>
 <style>
   :root{
     --bg:#0FDDF0;
@@ -356,6 +364,21 @@
     #slidetag{ display:none; }
     .plate-label{ display:none; }
     .demoarrow{ transform:rotate(90deg); margin:0; }
+    .recapcard{ width:min(100%,212px); }
+  }
+  @media (max-width:600px){
+    #bezel-top{ padding:0 12px; }
+    #bezel-bottom{ padding:0 10px; gap:8px; }
+    .pxbtn{ padding:9px 12px; font-size:.76rem; }
+    #track{ gap:4px; }
+    .tick{ width:9px; height:9px; }
+    #counter{ min-width:44px; font-size:.66rem; }
+  }
+  @media (max-width:440px){
+    .ctrl-group .btxt{ display:none; }
+    .pxbtn{ padding:10px; gap:0; }
+    #track{ display:none; }
+    #bezel-bottom{ justify-content:space-between; }
   }
 </style>
 
@@ -699,12 +722,12 @@
 
   <div id="bezel-bottom">
     <div class="ctrl-group">
-      <button class="pxbtn" id="prevBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg>Prev</button>
+      <button class="pxbtn" id="prevBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg><span class="btxt">Prev</span></button>
     </div>
     <div class="ctrl-group" id="track"></div>
     <div class="ctrl-group">
       <span id="counter">01 / 08</span>
-      <button class="pxbtn" id="nextBtn">Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="pxbtn" id="nextBtn"><span class="btxt">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
   </div>
 </div>
@@ -913,3 +936,6 @@
   slidetag.textContent = slides[0].dataset.title || '';
 })();
 </script>
+
+</body>
+</html>

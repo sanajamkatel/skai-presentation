@@ -290,6 +290,11 @@
     box-shadow:3px 3px 0 var(--ink-faint); font-family:var(--font); font-size:.72rem; font-weight:600;
     line-height:1.55; padding:10px 14px; text-align:left; white-space:nowrap;
   }
+  .returnhint{
+    display:flex; align-items:center; gap:7px; margin-top:10px; font-size:.68rem; font-weight:800;
+    color:var(--ink-dim); text-transform:uppercase; letter-spacing:.02em; white-space:nowrap;
+  }
+  .returnhint .icon{ width:13px; height:13px; color:var(--ink-dim); }
   .conn-h{ display:flex; flex-direction:column; align-items:center; justify-content:center; width:74px; flex:none; }
   .conn-h .line{ width:100%; height:0; border-top:3px dashed var(--ink); position:relative; }
   .conn-h .clabel{ font-size:.66rem; color:var(--ink-dim); margin-top:7px; white-space:nowrap; text-transform:uppercase; letter-spacing:.02em; font-weight:800; text-align:center; }
@@ -550,6 +555,7 @@
                       <div class="node-stack">
                         <div class="node"><svg class="icon"><use href="#i-msg"/></svg><div class="nlabel">Claude</div><div class="nsub">intent + params</div></div>
                         <div class="jsonchip">{<br>&nbsp;&nbsp;"action": "void_transaction",<br>&nbsp;&nbsp;"entity_id": "txn_88213"<br>}</div>
+                        <div class="returnhint"><svg class="icon"><use href="#i-undo"/></svg>back to Flask — validates + authorizes</div>
                       </div>
                     </div>
                     <div class="placeholder"><svg class="icon"><use href="#i-locksm"/></svg><span>Hop 2</span></div>
